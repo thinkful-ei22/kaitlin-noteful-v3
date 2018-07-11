@@ -39,7 +39,10 @@ router.get('/:id', (req, res, next) => {
   // mongoose.connect(MONGODB_URI)
   //   .then(() => {
   const searchId = req.params.id;
-
+  if (!(mongoose.Types.ObjectId.isValid(searchId))) {
+    return next('error');
+  }
+  
   return Note.findById(searchId)
     .then (results => {
       if (results) {
@@ -58,30 +61,6 @@ router.get('/:id', (req, res, next) => {
 });
 
 /* ========== POST/CREATE AN ITEM ========== */
-// router.post('/', (req, res, next) => {
-
-//   mongoose.connect(MONGODB_URI)
-//     .then(() => {
-//       const { title, content } = req.body;
-
-//       const newItem = { 
-//         title, 
-//         content,
-//       };
-
-//       return Note.create(newItem);
-//     })
-//     .then((results) => {
-//       res.location('path/to/new/document').status(201).json({ results });
-//     })
-//     .then(() => {
-//       return mongoose.disconnect();
-//     })
-//     .catch(err => {
-//       console.error(`ERROR: ${err.message}`);
-//       console.error(err);
-//     });
-// });
 
 router.post('/', (req, res, next) => {
   const {title, content} = req.body;

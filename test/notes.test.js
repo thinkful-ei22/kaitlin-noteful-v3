@@ -95,7 +95,7 @@ describe ('Notes Test', function() {
     });
     it('should return 500 given an invalid id', function() {
       // grab the inputed id
-      const invalidId = '123-123';
+      const invalidId = '00000000000000000000000o';
 
       return chai.request(app)
         .get(`/api/notes/${invalidId}`)
