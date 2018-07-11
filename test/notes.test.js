@@ -200,7 +200,7 @@ describe ('Notes Test', function() {
         })
         .then(function(_note) {
           expect(_note).to.be.null;
-        });
+        }); 
     });
   });
 
