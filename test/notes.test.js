@@ -8,8 +8,9 @@ const app = require('../server');
 const { TEST_MONGODB_URI } = require('../config');
 
 const Note = require('../models/note');
-
 const seedNotes = require('../db/seed/notes');
+const Folder = require('../models/folders');
+const seedFolders = require('../db/seed/folders');
 
 const expect = chai.expect;
 chai.use(chaiHttp);
@@ -21,7 +22,9 @@ describe ('Notes Test', function() {
   });
 
   beforeEach(function () {
-    return Note.insertMany(seedNotes);
+    const noteInsertPromise = Note.insertMany(seedNotes);
+    const folderInsertPromise = Folder.insertMany(seedFolders);
+    return Promise.all([noteInsertPromise, folderInsertPromise]);
   });
 
   afterEach(function () {
