@@ -27,7 +27,7 @@ describe ('Notes Test', function() {
     return Promise.all([noteInsertPromise, folderInsertPromise]);
   });
 
-  afterEach(function () {
+  afterEach(function () { 
     return mongoose.connection.db.dropDatabase();
   });
 
