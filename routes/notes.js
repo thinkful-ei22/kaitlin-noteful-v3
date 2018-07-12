@@ -39,9 +39,9 @@ router.get('/:id', (req, res, next) => {
   // mongoose.connect(MONGODB_URI)
   //   .then(() => {
   const searchId = req.params.id;
-  // if (!(mongoose.Types.ObjectId.isValid(searchId))) {
-  //   return next('error');
-  // }
+  if (!(mongoose.Types.ObjectId.isValid(searchId))) {
+    return next('error');
+  }
   
   return Note.findById(searchId)
     .then (results => {
