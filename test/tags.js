@@ -83,7 +83,7 @@ describe ('Tags Test', function() {
         .catch(error => error.response)
         .then((res) => {
           expect(res).to.have.status(400);
-          expect(res.body.message).to.eq('The id is not valid');
+          expect(res.body.message).to.eq('The tag id is not valid');
         });
     });
     it('should return a 404 status given a nonexistant id', function () {
