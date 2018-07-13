@@ -27,7 +27,7 @@ tagsRouter.get('/:id', (req, res, next) => {
   // validate that it is a Mongo Object
   if(!mongoose.Types.ObjectId.isValid(searchId)) 
   {
-    const err = new Error('The id is not valid'); 
+    const err = new Error('The tag id is not valid'); 
     err.status = 400; 
     return next(err); 
   }

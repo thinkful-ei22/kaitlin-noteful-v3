@@ -120,15 +120,20 @@ router.put('/:id', (req, res, next) => {
     if(!mongoose.Types.ObjectId.isValid(updateItem.folderId)) 
     { 
       const err = new Error('The id is not valid'); 
-      err.status = 400; return next(err); 
+      err.status = 400; 
+      return next(err); 
     }
   }
 
   if (updateItem.tags) {
-    if(!mongoose.Types.ObjectId.isValid(updateItem.tags)) {
-      const err = new Error('The tag id is not valid'); 
-      err.status = 400; return next(err); 
-    }
+    console.log(updateItem.tags);
+    updateItem.tags.forEach((tag) => { 
+      if(!mongoose.Types.ObjectId.isValid(tag)) {
+        const err = new Error('The tag id is not valid'); 
+        err.status = 400; 
+        return next(err); 
+      }
+    });
   }
 
   return Note.findByIdAndUpdate(noteId, {$set: updateItem}, {new: true})
