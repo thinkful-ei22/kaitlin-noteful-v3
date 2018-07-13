@@ -3,8 +3,8 @@
 // REQUIRES
 const express = require('express');
 const mongoose = require('mongoose');
-const mongo = require('MongoDB');
-const { MONGODB_URI } = require('../config');
+// const mongo = require('mongodb');
+// const { MONGODB_URI } = require('../config');
 const Tag = require('../models/tags');
 const Note = require('../models/note');
 const tagsRouter = express.Router();
