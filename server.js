@@ -7,6 +7,7 @@ const { PORT, MONGODB_URI } = require('./config');
 
 const notesRouter = require('./routes/notes');
 const foldersRouter = require('./routes/folders');
+const tagsRouter = require('./routes/tags');
 
 const mongoose = require('mongoose');
 
@@ -30,6 +31,9 @@ app.use('/api/notes', notesRouter);
 // Mount routers
 app.use('/api/folders', foldersRouter);
 
+// Mount routers
+app.use('/api/tags', tagsRouter);
+
 // Custom 404 Not Found route handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
@@ -49,13 +53,6 @@ app.use((err, req, res, next) => {
 });
 
 // Listen for incoming connections
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, function () {
-    console.info(`Server listening on ${this.address().port}`);
-  }).on('error', err => {
-    console.error(err);
-  });
-}
 
 if (process.env.NODE_ENV !== 'test') {
 

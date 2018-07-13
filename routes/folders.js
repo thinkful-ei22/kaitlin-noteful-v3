@@ -11,7 +11,7 @@ const foldersRouter = express.Router();
 // GET ALL /folders 
 foldersRouter.get('/', (req, res, next) =>{
   // SORT BY NAME
-  return Folder.find()
+  return Folder.find().collation({locale:'en'}).sort({name: 1})
     .then(results => {
       res.json(results);
     })
@@ -27,7 +27,8 @@ foldersRouter.get('/:id', (req, res, next) => {
   if(!mongoose.Types.ObjectId.isValid(searchId)) 
   { 
     const err = new Error('The id is not valid'); 
-    err.status = 400; return next(err); 
+    err.status = 400; 
+    return next(err); 
   }
   // Conditionally return a 200 response OR a 404 not found
   return Folder.findById(searchId)
@@ -90,6 +91,7 @@ foldersRouter.put('/:id', (req, res, next) => {
   if(!req.body.name) {
     const err = new Error('Missing `name` in request body');
     err.status = 400;
+    return next(err);
   }
 
   return Folder.findByIdAndUpdate(folderId, {$set: updateFolder}, {new: true})

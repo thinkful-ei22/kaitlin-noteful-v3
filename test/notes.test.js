@@ -85,7 +85,7 @@ describe ('Notes Test', function() {
           expect(res).to.be.json;
 
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.keys('id','title','content', 'createdAt', 'updatedAt', 'folderId');
+          expect(res.body).to.have.keys('id','title','content', 'createdAt', 'updatedAt', 'folderId', 'tags');
 
           // 3) then compare database results to API response
           expect(res.body.id).to.equal(data.id);
@@ -141,7 +141,7 @@ describe ('Notes Test', function() {
           expect(res).to.have.header('location');
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
-          expect(res.body).to.have.keys('id', 'title', 'content', 'createdAt', 'updatedAt');
+          expect(res.body).to.have.keys('id', 'title', 'content', 'createdAt', 'updatedAt', 'tags');
           // 2) then call the database
           return Note.findById(res.body.id);
         })

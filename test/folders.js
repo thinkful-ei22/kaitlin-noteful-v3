@@ -74,7 +74,7 @@ describe ('Folders Test', function() {
           expect(new Date(res.body.updatedAt)).to.eql(data.updatedAt);
         });
     });
-    it('should return 500 given an invalid id', function() {
+    it('should return 00 given an invalid id', function() {
       // grab the inputed id
       const invalidId = '00000000000000000000000o';
 
