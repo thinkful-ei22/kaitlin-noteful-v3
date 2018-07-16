@@ -87,7 +87,7 @@ router.post('/', (req, res, next) => {
     }
   }
   // loop through array of tags to validated
-  if(newNote.tags === null) {
+  if(newNote.tags === null || newNote.tags === undefined ) {
     newNote.tags = [];
   } else {
   
@@ -105,7 +105,6 @@ router.post('/', (req, res, next) => {
   return Note.create(newNote)
     .then(results => {
       if (results){
-        console.log(results);
         res.location(`${req.originalUrl}/${res.id}`).status(201).json(results);
       } else {
         next();
