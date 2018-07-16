@@ -85,7 +85,7 @@ router.post('/', (req, res, next) => {
   }
   // loop through array of tags to validated
   if(newNote.tags.length > 0) {
-    if(newNote.tag.find( tagId => {
+    if(newNote.tags.find( tagId => {
       return !mongoose.Types.ObjectId.isValid(tagId);
     })){
       const err = new Error('The tag id is not valid'); 
