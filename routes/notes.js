@@ -69,8 +69,9 @@ router.post('/', (req, res, next) => {
     title: title, 
     content: content, 
     folderId: folderId,
-    tags
+    tags: []
   };
+
   if (!newNote.title) {
     const err = new Error('Missing `title` in request body');
     err.status = 400;
@@ -84,6 +85,12 @@ router.post('/', (req, res, next) => {
     }
   }
   // loop through array of tags to validated
+  if(newNote.tags === null) {
+    newNote.tags = [];
+  }
+
+  console.log(newNote.tags);
+  
   if(newNote.tags.length > 0) {
     if(newNote.tags.find( tagId => {
       return !mongoose.Types.ObjectId.isValid(tagId);
