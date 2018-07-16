@@ -83,13 +83,13 @@ router.post('/', (req, res, next) => {
       err.status = 400; return next(err); 
     }
   }
-  if (newNote.tags) {
-    if(!mongoose.Types.ObjectId.isValid(newNote.tags.id)) 
-    { 
-      const err = new Error('The tag id is not valid'); 
-      err.status = 400; return next(err); 
-    }
-  }
+  // if (newNote.tags) {
+  //   if(!mongoose.Types.ObjectId.isValid(newNote.tags.id)) 
+  //   { 
+  //     const err = new Error('The tag id is not valid'); 
+  //     err.status = 400; return next(err); 
+  //   }
+  // }
   return Note.create(newNote)
     .then(results => {
       if (results){
