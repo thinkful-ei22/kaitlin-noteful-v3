@@ -69,8 +69,10 @@ router.post('/', (req, res, next) => {
     title: title, 
     content: content, 
     folderId: folderId,
-    tags: []
+    tags: tags
   };
+
+  console.log(req.body);
 
   if (!newNote.title) {
     const err = new Error('Missing `title` in request body');
@@ -87,23 +89,23 @@ router.post('/', (req, res, next) => {
   // loop through array of tags to validated
   if(newNote.tags === null) {
     newNote.tags = [];
-  }
-
-  console.log(newNote.tags);
+  } else {
   
-  if(newNote.tags.length > 0) {
-    if(newNote.tags.find( tagId => {
-      return !mongoose.Types.ObjectId.isValid(tagId);
-    })){
-      const err = new Error('The tag id is not valid'); 
-      err.status = 400; 
-      return next(err); 
+    if(newNote.tags.length > 0) {
+      if(newNote.tags.find( tagId => {
+        return !mongoose.Types.ObjectId.isValid(tagId);
+      })){
+        const err = new Error('The tag id is not valid'); 
+        err.status = 400; 
+        return next(err); 
+      }
     }
   }
 
   return Note.create(newNote)
     .then(results => {
       if (results){
+        console.log(results);
         res.location(`${req.originalUrl}/${res.id}`).status(201).json(results);
       } else {
         next();
